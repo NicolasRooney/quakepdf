@@ -2,7 +2,7 @@
 
 Quake's software renderer running entirely inside a PDF file.
 
-This project leverages the JavaScript engine embedded in modern PDF readers to execute the game, utilizing a technique similar to [doompdf](https://github.com/ading2210/doompdf). The resulting `quake.pdf` is highly optimized, weighing in at just 9.7 MB, and requires a Chromium-based browser to run.
+This project leverages the JavaScript engine embedded in modern PDF readers to execute the game, utilizing a technique similar to [doompdf](https://github.com/ading2210/doompdf). Requires a Chromium-based browser to run.
 
 
 ## Building from Source
