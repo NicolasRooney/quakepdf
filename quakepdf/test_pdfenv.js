@@ -9,6 +9,13 @@
 	  - an `app` object with setInterval / clearInterval / alert
 	  - a `getField(name)` returning an object with a `.value` property
 
+  NOTE: Patch to add if you are using a different Emscripten:
+  
+  console: {
+	  println: function () {}, clear: function () {},
+	  show: function () {},    hide: function () {},
+  },
+
 	Usage: node test_pdfenv.js <compiled.js> [frames] [--dump out.txt]
 */
 
@@ -22,11 +29,6 @@ const dumpPath = dumpIdx > -1 ? process.argv[dumpIdx + 1] : null;
 
 const fields = new Map();
 let fieldWrites = 0;
-
-console: {
-	println: function () {}, clear: function () {},
-	show: function () {},    hide: function () {},
-},
 
 function getField(name) {
 	if (!fields.has(name)) {
