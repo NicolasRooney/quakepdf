@@ -4,48 +4,6 @@ Quake's software renderer running entirely inside a PDF file.
 
 This project leverages the JavaScript engine embedded in modern PDF readers to execute the game, utilizing a technique similar to [doompdf](https://github.com/ading2210/doompdf). The resulting `quake.pdf` is highly optimized, weighing in at just 9.7 MB, and requires a Chromium-based browser to run.
 
-## Performance & Status
-
-The project has been validated end-to-end in a custom harness that emulates the PDF JS environment. The engine runs consistently in slow motion to maintain accurate integration, utilizing a fixed timestep (`QG_FIXED_STEP`) of 0.05 seconds regardless of the wall clock.
-
-**Performance Benchmarks:**
-
-| Metric | Time | Notes |
-| --- | --- | --- |
-| Boot | 209 ms | Includes parse, PAK unpack, and Host_Init
-
- |
-| First Frame | 432 ms | Measured with cold caches
-
- |
-| Median Tick | 10.7 ms | Core engine execution time
-
- |
-| Blit | 2-4 ms | Transferring framebuffer to the 200 text fields
-
- |
-
-## Technical Highlights
-
-Unlike older WebAssembly-to-JS projects, QuakePDF does not require the 2020-era fastcomp toolchain. It utilizes modern Emscripten (`wasm2js` with `-sWASM=0`), which emits pure JavaScript and proves that complex C/C++ codebases can run in a PDF without WebAssembly being present in the global scope.
-
-### Rendering Architecture
-
-* **AcroForm Framebuffer:** The screen is rendered using 200 AcroForm text fields, representing one scanline each.
-
-
-* **Optimized Characters:** Scanlines are filled using the characters `_ :: ? // b #`, chosen because characters like `:` and `/` are half-width in Chrome's default form field font.
-
-
-* **Palette Lookup:** Instead of per-pixel RGB averaging, QuakePDF uses an 8-bit palettised buffer where the palette collapses to shade classes, costing only one array index per pixel.
-
-
-* **Adaptive Shade Ramp:** Because Quake's software renderer processes every texel through a colormap for lighting, fixed luma cutoffs result in a completely dark scene. The ramp equalizes against on-screen content by sampling 1 in 16 pixels to build a luma histogram.
-
-
-* **Drifting Histogram:** The shade cuts are placed at equal-population percentiles and recomputed every 15 frames with a decaying histogram to prevent visual popping.
-
-
 
 ## Building from Source
 
