@@ -14,7 +14,7 @@ To compile QuakePDF, you will need a copy of the shareware `pak0.pak` and Emscri
 * `NODE_PATH` must be set to `/usr/share/nodejs` so the compiler can locate the acorn optimizer.
 
 
-* Emscripten (version 3.1.6). Using another version will likely be a pain, but I put in some patches that _might_ work. Build from source with:
+* Emscripten **(version 3.1.6)**. Using another version will likely be a pain, but I put in some patches that _might_ work, note it will require some wrangling and patching (including a commented-out one in test_pdfenv.js). Build from source with:
 
 ```bash
 git clone https://github.com/emscripten-core/emsdk
