@@ -1,3 +1,5 @@
+![QuakePDF gameplay](assets/gameplay.gif)
+
 # QuakePDF
 
 Quake's software renderer running entirely inside a PDF file.
